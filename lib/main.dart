@@ -10,100 +10,48 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Appbar',
       theme: ThemeData(primarySwatch: Colors.red),
-      home: MyPage(),
+      home: FirstPage(),
     );
   }
 }
 
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
+class FirstPage extends StatelessWidget {
+  const FirstPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context2) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Appbar icon menu'),
-        centerTitle: true,
-        elevation: 0.0,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              print('shopping cart button is clicked');
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              print('Search button is clicked');
-            },
-          ),
-        ],
+        title: Text('First page'),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/ss.gif'),
-                backgroundColor: Colors.white,
-              ),
-              otherAccountsPictures: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: AssetImage('assets/ss.gif'),
-                ),
-                // CircleAvatar(
-                //   backgroundColor: Colors.white,
-                //   backgroundImage: AssetImage('assets/ss.gif'),
-                // ),
-              ],
-              accountName: Text('BBANTO'),
-              accountEmail: Text('bbanto@bbanto.com'),
-              onDetailsPressed: () {
-                print('arrow is clicked');
-              },
-              decoration: BoxDecoration(
-                  color: Colors.red[200],
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(40.0),
-                      bottomRight: Radius.circular(40.0))),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Colors.grey[850],
-              ),
-              title: Text('Home'),
-              onTap: () {
-                print('Home iss clicked');
-              },
-              trailing: Icon(Icons.add),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-                color: Colors.grey[850],
-              ),
-              title: Text('settings'),
-              onTap: () {
-                print('settings iss clicked');
-              },
-              trailing: Icon(Icons.add),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.question_answer,
-                color: Colors.grey[850],
-              ),
-              title: Text('Q&A'),
-              onTap: () {
-                print('Q&A iss clicked');
-              },
-              trailing: Icon(Icons.add),
-            ),
-          ],
+      body: Center(
+        child: RaisedButton(
+          child: Text('Go to the Second page'),
+          onPressed: () {
+            Navigator.push(context2,
+                MaterialPageRoute(builder: (context) => SecondPage()));
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext ctx) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second page'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Go to the First page'),
+          onPressed: () {
+            Navigator.pop(ctx);
+          },
         ),
       ),
     );
